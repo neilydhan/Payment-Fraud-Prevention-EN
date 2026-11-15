@@ -1,0 +1,5 @@
+flowchart TB
+  E[3DS errors on malformed data<br/>payment continues to authorization] --> M[Merchant: sees only<br/>a generic processing error]
+  E --> PSP[PSP: knows the request failed<br/>but may not be told why]
+  E --> ISS[Issuer: most likely sees an ordinary<br/>unauthenticated transaction<br/>with no sign that 3DS failed]
+  E --> F[Attacker: learns at once<br/>whether it worked<br/>and can adjust and retry]

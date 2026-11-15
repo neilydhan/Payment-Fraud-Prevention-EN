@@ -1,0 +1,23 @@
+sequenceDiagram
+  autonumber
+  participant C as Cardholder browser
+  participant M as Merchant and PSP<br/>(3DS Server)
+  participant DS as Card network<br/>Directory Server (DS)
+  participant ACS as Issuer Access<br/>Control Server (ACS)
+  participant I as Issuer<br/>authorization system
+  C->>M: Submit card and order
+  M->>C: Collect device and browser data
+  C-->>M: Return browser data
+  M->>DS: AReq authentication request
+  DS->>ACS: Forward AReq
+  ACS-->>DS: ARes risk assessment result
+  DS-->>M: ARes
+  alt Low risk, frictionless
+    Note over M: transStatus = Y
+  else Further verification needed
+    M->>C: Show challenge screen
+    C->>ACS: Enter code or confirm in banking app
+    ACS-->>M: Final authentication result
+  end
+  M->>I: Authorization request with authentication result
+  I-->>M: Approve or decline

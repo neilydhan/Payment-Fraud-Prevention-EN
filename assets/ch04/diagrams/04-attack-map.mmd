@@ -1,0 +1,19 @@
+flowchart TB
+  S[Cardholder checks out] --> A{Is 3DS started?}
+  A -->|No| G[Authorization]
+  A -->|Yes| B[Collect device and browser data]
+  B --> C[Issuer risk assessment]
+  C -->|Low risk| F[Authenticated]
+  C -->|High risk| D[Challenge<br/>code or app confirmation]
+  D --> F
+  F --> G
+
+  X1[① Avoid<br/>exemptions and channels<br/>without authentication] -.-> A
+  X2[② Disguise<br/>forged device data<br/>and proxy IPs] -.-> B
+  X6[⑥ Disrupt<br/>make authentication fail<br/>and get waved through] -.-> B
+  X5[⑤ Probe<br/>use results to<br/>check cards] -.-> C
+  X3[③ Deceive<br/>phishing, real time relay<br/>OTP bots] -.-> D
+  X4[④ Hijack<br/>bind the card to<br/>an attacker device] -.-> D
+
+  classDef attack fill:#FEE2E2,stroke:#DC2626,color:#7F1D1D
+  class X1,X2,X3,X4,X5,X6 attack

@@ -1,0 +1,25 @@
+flowchart LR
+  subgraph ATK[Attack]
+    direction TB
+    A1[① Avoid]
+    A2[② Disguise]
+    A3[③ Deceive]
+    A4[④ Hijack]
+    A5[⑤ Probe]
+    A6[⑥ Disrupt]
+  end
+  subgraph DEF[Matching defense]
+    direction TB
+    D1[Inventory every path to authorization<br/>use exemptions and MIT flags by the rules]
+    D2[Check that device, network and behavior<br/>are consistent, not one signal alone]
+    D3[Move to phishing resistant methods<br/>such as in app confirmation and biometrics]
+    D4[Set an observation period<br/>for newly bound cards and tokens]
+    D5[Bot detection and rate limits<br/>before authentication<br/>one generic failure message]
+    D6[Block on error for high risk payments<br/>monitor error rates and alert]
+  end
+  A1 --> D1
+  A2 --> D2
+  A3 --> D3
+  A4 --> D4
+  A5 --> D5
+  A6 --> D6

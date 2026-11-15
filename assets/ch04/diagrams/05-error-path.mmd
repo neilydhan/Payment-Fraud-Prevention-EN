@@ -1,0 +1,6 @@
+flowchart TB
+  N1[Obtain stolen card details] --> N2[Forge malformed<br/>device and browser data]
+  N2 --> N3[Authentication request<br/>is rejected or errors out]
+  N3 --> N4{How does the payment<br/>flow handle the error?}
+  N4 -->|Proceed: fail open| N5[Authorized without authentication<br/>no liability shift]
+  N4 -->|Stop: fail closed| N6[Transaction ends]

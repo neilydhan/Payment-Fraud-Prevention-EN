@@ -1,0 +1,17 @@
+[book]
+authors = ["Neil Han"]
+language = "en"
+src = "."
+exclude = [".git/**", ".github/**", "book/**", "assets/**/*.mmd", ".DS_Store"]
+title = "Payment Fraud Prevention: A Practical Guide for Global Businesses"
+description = "A practical guide to card payment fraud prevention for businesses selling across markets: authentication, card network rules, fraud programs and operations"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "navy"
+no-section-label = true
+git-repository-url = "https://github.com/neilydhan/Payment-Fraud-Prevention-EN"
+print = { enable = true }
+
+[build]
+build-dir = "book"

@@ -1,0 +1,31 @@
+%%{init: {"flowchart": {"subGraphTitleMargin": {"top": 8, "bottom": 28}}}}%%
+flowchart TB
+  subgraph L1[Stop 1: 3DS Server<br/>merchant or PSP side]
+    direction TB
+    S1{Can the request<br/>be sent?}
+    S1 -->|Fails own validation<br/>or blocked by risk controls| O1[Request never sent<br/>network and issuer<br/>never see it]
+  end
+
+  subgraph L2[Stop 2: card network DS<br/>request does not reach the issuer]
+    direction TB
+    D1{How does the<br/>DS respond?}
+    D1 -->|Blocked at network<br/>layer or timed out| O2[No standard 3DS message<br/>logged as a technical error]
+    D1 -->|Message itself<br/>is invalid| O3[DS returns an error message<br/>error component D]
+    D1 -->|DS handles<br/>it directly| O4[DS returns a result itself<br/>for example A, attempts]
+  end
+
+  subgraph L3[Stop 3: issuer ACS<br/>request reaches the issuer]
+    direction TB
+    A1{Issuer assesses risk}
+    A1 --> O5[Y authenticated<br/>C or D challenge required]
+    A1 --> O6[N not authenticated<br/>R rejected<br/>U could not be performed<br/>with a reason code<br/>for example 11 suspected fraud]
+    A1 -->|Invalid message<br/>or timeout| O7[ACS returns an error message<br/>error component A]
+  end
+
+  L1 ==>|Send authentication request| L2
+  L2 ==>|Forward to issuer| L3
+
+  classDef noissuer fill:#F3F4F6,stroke:#9CA3AF,color:#374151
+  classDef issuer fill:#E0E7FF,stroke:#4F46E5,color:#1E1B4B
+  class O1,O2,O3,O4 noissuer
+  class O5,O6,O7 issuer
